@@ -8,11 +8,6 @@ function App() {
       <br />
       <Link to={"/signup"}>Signup</Link>
       <br />
-      <Link to={"/dashboard"}>DashBoard</Link>
-      <br />
-      <Link to={"/send"}>Send</Link>
-
-      <Button>Testing</Button>
     </div>
   );
 }
