@@ -9,9 +9,9 @@ const userRouter = express.Router();
 
 //zod for validation
 const userDataSchema = zod.object({
-  userName: zod.string(),
   firstName: zod.string(),
   lastName: zod.string(),
+  email: zod.string(),
   password: zod.string(),
 });
 
@@ -28,7 +28,7 @@ userRouter.post("/signup", async function (req, res) {
   }
   //check with db
   const dbres = await User.findOne({
-    userName: userData.userName,
+    email: userData.email,
     password: userData.password,
   });
 
@@ -36,20 +36,14 @@ userRouter.post("/signup", async function (req, res) {
   if (dbres) {
     res.status(400).json({ msg: "user already exist" });
   } else {
-    await User.create({
-      userName: userData.userName,
+    const user = await User.create({
       firstName: userData.firstName,
       lastName: userData.lastName,
+      email: userData.email,
       password: userData.password,
     });
 
-    let gettingId = await User.findOne({
-      userName: userData.userName,
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      password: userData.password,
-    });
-    const userId = gettingId._id;
+    const userId = user._id;
 
     let payload = {
       //_.id
@@ -67,7 +61,7 @@ userRouter.post("/signup", async function (req, res) {
 
 // we generate jwt using signin
 const signInDataSchema = zod.object({
-  userName: zod.string(),
+  email: zod.string(),
   password: zod.string(),
 });
 
@@ -83,17 +77,16 @@ userRouter.post("/signin", async function (req, res) {
   }
   //check in db if exist
   const dbRes = await User.findOne({
-    userName: body.userName,
+    email: body.email,
     password: body.password,
   });
-
-  const userId = dbRes._id;
 
   //if exist generate token
   if (!dbRes) {
     return res.status(400).json({ msg: "Unauthorized" });
   } else {
     //exist -- create jwt token
+    const userId = dbRes._id;
 
     const token = jwt.sign({ userId }, jwtSecret);
 
@@ -191,7 +184,7 @@ userRouter.get("/bulk", async function (req, res) {
   if (!dbRes) {
     return res.status(400).json({ msg: "No user of this name" });
   }
-  res.status(200).json({ msg: "User found" });
+  res.status(200).json({ msg: "User found", user: dbRes });
 });
 
 module.exports = {

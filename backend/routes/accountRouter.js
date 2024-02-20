@@ -26,6 +26,7 @@ accountRouter.get("/balance", async function (req, res) {
 
   res.json({
     msg: `persons balance is ${balance}`,
+    balance: balance,
   });
 });
 
@@ -40,14 +41,17 @@ accountRouter.get("/balance", async function (req, res) {
  */
 accountRouter.post("/transfer", async function (req, res) {
   //adding transaction as multiple
-  const session = await Account.startSession();
-  session.startTransaction();
+  // const session = await Account.startSession();
+  // session.startTransaction();
 
   try {
     // dealing with sender
     //get data
     const senderData = req.headers.authorization;
+    console.log("sender data ----- ", senderData);
     const { name, amount } = req.body;
+
+    console.log(name, amount);
 
     //identifying sender id
     const tokenObj = jwt.verify(senderData, jwtSecret);
@@ -56,11 +60,11 @@ accountRouter.post("/transfer", async function (req, res) {
     //adjust his/her acc balance
     const balObj = await Account.findOne({
       person: tokenObj.payload.userId,
-    }).session(session);
+    });
     console.log("balance ", balObj.balance);
 
     let updatedBalance = balObj.balance - amount;
-    console.log(updatedBalance);
+    console.log("updatedBalance ----- ", updatedBalance);
 
     const accountObj = await Account.updateOne(
       { person: tokenObj.payload.userId },
@@ -69,21 +73,19 @@ accountRouter.post("/transfer", async function (req, res) {
           balance: updatedBalance,
         },
       }
-    ).session(session);
+    );
     console.log("acc obj", accountObj);
 
     //dealing with reciever
     //get data -- done above
     //identifying reciever id
-    const userObj = await User.findOne({ firstName: name }).session(session);
+    const userObj = await User.findOne({ firstName: name });
     console.log("user obj ", userObj._id);
     const personId = userObj._id;
 
     //adjust his/her acc balance
 
-    const rereceiverBal = await Account.findOne({ person: personId }).session(
-      session
-    );
+    const rereceiverBal = await Account.findOne({ person: personId });
     console.log(rereceiverBal.balance);
     let recieverUpdatedBalance = rereceiverBal.balance + amount;
     const receiverBalUpdate = await Account.updateOne(
@@ -93,12 +95,12 @@ accountRouter.post("/transfer", async function (req, res) {
           balance: recieverUpdatedBalance,
         },
       }
-    ).session(session);
+    );
 
     res.json({ msg: "money transfer successful" });
   } catch (error) {
-    await session.abortTransaction();
-    session.endSession();
+    // await session.abortTransaction();
+    // session.endSession();
     console.error(error);
     res.status(500).json({ error: error.message });
   }

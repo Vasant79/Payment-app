@@ -2,13 +2,14 @@ const { default: mongoose } = require("mongoose");
 
 let userSchema = new mongoose.Schema({
   //add some constraint
-  userName: {
-    type: String,
-  },
+
   firstName: {
     type: String,
   },
   lastName: {
+    type: String,
+  },
+  email: {
     type: String,
   },
   password: {
