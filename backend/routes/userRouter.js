@@ -7,6 +7,21 @@ const { authMiddleware } = require("../middleware/authMiddleware");
 const { Account } = require("../models/Account");
 const userRouter = express.Router();
 
+async function generateAccessAndRefresTokens(user) {
+  console.log("user -- ", user);
+  const accessToken = user.createAccessToken();
+  const refreshToken = user.createRefreshToken();
+
+  user.refreshToken = refreshToken;
+
+  console.log("accessToken ", accessToken);
+  console.log("refreshToken ", refreshToken);
+
+  await user.save({ validateBeforeSave: false });
+
+  return { accessToken, refreshToken };
+}
+
 //zod for validation
 const userDataSchema = zod.object({
   firstName: zod.string(),
@@ -45,17 +60,11 @@ userRouter.post("/signup", async function (req, res) {
 
     const userId = user._id;
 
-    let payload = {
-      //_.id
-      userId,
-    };
-    let token = jwt.sign({ payload }, jwtSecret);
-
     //assign balace to user -- use userId
     const amount = (Math.random() * 100000).toFixed(2);
     await Account.create({ person: userId, balance: amount });
 
-    return res.status(200).json({ msg: "user created", token });
+    return res.status(200).json({ msg: "user created" });
   }
 });
 
@@ -68,6 +77,7 @@ const signInDataSchema = zod.object({
 userRouter.post("/signin", async function (req, res) {
   //get data
   let body = req.body;
+  console.log("body --> ", body);
   let { success } = signInDataSchema.safeParse(body); //obj destructuring
 
   console.log(success);
@@ -76,24 +86,47 @@ userRouter.post("/signin", async function (req, res) {
     return res.status(400).json({ msg: "invalid inputs" });
   }
   //check in db if exist
+
   const dbRes = await User.findOne({
     email: body.email,
-    password: body.password,
   });
+
+  if (!dbRes) {
+    return res.status(400).json({ msg: "unauthorized" });
+  }
+
+  if (!(await dbRes.isPasswordCorrect(body.password))) {
+    console.log("Password entered not matching with hash password");
+    res
+      .status(400)
+      .json({ msg: "Password entered not matching with hash password" });
+    return;
+  }
 
   //if exist generate token
   if (!dbRes) {
     return res.status(400).json({ msg: "Unauthorized" });
   } else {
     //exist -- create jwt token
-    const userId = dbRes._id;
+    console.log("dbRes  -- ", dbRes);
+    const { accessToken, refreshToken } = await generateAccessAndRefresTokens(
+      dbRes
+    );
 
-    const token = jwt.sign({ userId }, jwtSecret);
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
 
-    res.status(200).json({
-      msg: "loged in",
-      token: token,
-    });
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
+      .json({
+        msg: "loged in",
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      });
   }
 });
 

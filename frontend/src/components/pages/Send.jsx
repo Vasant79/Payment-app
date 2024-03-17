@@ -22,14 +22,13 @@ export default function Send() {
     try {
       const response = await axios({
         method: "post",
-        url: "http://localhost:3001/api/v1/account/transfer",
+        url: "/v1/account/transfer",
         data: {
           name: person,
           amount: amount,
         },
         headers: {
-          Authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJJZCI6IjY1ZDQ4NDA5ZGE5ODQzN2Y2YTkyZjkxYyJ9LCJpYXQiOjE3MDg0MjYyNDl9.s_G-erj2Hn5ho2afVVwcfX9md3KE2GkrLwny2k9b0cM",
+          Authorization: null,
         },
       });
 
@@ -52,24 +51,73 @@ export default function Send() {
     }
   }
 
+  // <h1>Send Money Page</h1>
+  // <form>
+  //   <label>Transfer Money To : {person}</label>
+  //   <br />
+  //   <input
+  //     value={amount}
+  //     onChange={(e) => setAmount(e.target.value)}
+  //     required
+  //   ></input>
+
+  //   <Button type="submit" onClick={handleTransfer}>
+  //     Transfer
+  //   </Button>
+  // </form>
+
+  // {
+  //   display ? "Money Tranfered " : null;
+  // }
+
   return (
     <div>
-      <h1>Send Money Page</h1>
-      <form>
-        <label>Transfer Money To : {person}</label>
-        <br />
-        <input
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          required
-        ></input>
+      <div className="max-w-md mt-10 mx-auto overflow-hidden rounded-lg shadow-lg border-l-8 border-pink-500">
+        <div className="p-6">
+          <form>
+            <label className="text-gray-800 text-2xl font-semibold mb-2">
+              Transfer Money To : {person}
+            </label>
+            <br />
 
-        <Button type="submit" onClick={handleTransfer}>
-          Transfer
-        </Button>
-      </form>
+            <input
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="m-2 border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              required
+            ></input>
+            <Button type="submit" onClick={handleTransfer}>
+              Transfer
+            </Button>
+          </form>
+        </div>
+      </div>
 
-      {display ? "Money Tranfered " : null}
+      {display ? (
+        <div className="max-w-md mt-10 mx-auto bg-green-100 border-l-4 border-green-500 text-green-700 px-4 py-3 rounded-md shadow-md">
+          <div className="flex">
+            <div className="py-1">
+              <svg
+                className="h-6 w-6 text-green-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+            <div className="ml-2">
+              <p className="font-semibold">Success</p>
+              <p>Money transfered...</p>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

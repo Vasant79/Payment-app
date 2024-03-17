@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Button from "../reusableComp/Button";
+import Heading from "../reusableComp/Heading";
+import Input from "../reusableComp/Input";
 
 /**
  * problem statement --
@@ -18,7 +20,7 @@ export default function SignIn() {
   async function signIn() {
     const signIn = await axios({
       method: "post",
-      url: "http://localhost:3001/api/v1/user/signin",
+      url: "/v1/user/signin",
       data: {
         email: email,
         password: password,
@@ -29,12 +31,15 @@ export default function SignIn() {
     return signIn.data;
   }
 
-  function handleFormSubmit(event) {
+  async function handleFormSubmit(event) {
     event.preventDefault();
 
     console.log("submitting form");
 
-    if (signIn()) {
+    const signInResponse = await signIn();
+    console.log("sign in response ---> ", signInResponse);
+
+    if (signInResponse.msg == "loged in") {
       navigate("/dashboard");
     } else {
       console.log("sign in error");
@@ -42,26 +47,38 @@ export default function SignIn() {
   }
 
   return (
-    <div>
-      <h1> This is sign in page</h1>
+    <div className="bg-gradient-to-r from-white to-purple-400  h-screen flex justify-center items-center">
+      <div className="max-w-md mt-10 mx-auto overflow-hidden bg-white rounded-xl shadow-lg border-l-8 border-pink-500">
+        <div className="mx-auto p-4">
+          <Heading label="Sign In" />
+        </div>
+        <form
+          className=" flex flex-col justify-center"
+          onSubmit={handleFormSubmit}
+        >
+          <div>
+            <Input
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Input>
+          </div>
 
-      <form onSubmit={handleFormSubmit}>
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
+          <div>
+            <Input
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></Input>
+          </div>
 
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-
-        <Button type="submit">Sign in</Button>
-      </form>
+          <div className="mx-auto">
+            <Button type="submit">Sign in</Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

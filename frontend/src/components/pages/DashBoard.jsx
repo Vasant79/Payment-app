@@ -5,22 +5,12 @@ import SearchUser from "../reusableComp/SearchUser";
 export default function DashBoard() {
   const [balance, setBalance] = useState(0);
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJJZCI6IjY1ZDQ4NDA5ZGE5ODQzN2Y2YTkyZjkxYyJ9LCJpYXQiOjE3MDg0MjYyNDl9.s_G-erj2Hn5ho2afVVwcfX9md3KE2GkrLwny2k9b0cM";
-
   useEffect(() => {
     async function fetchBalance() {
       try {
-        const balanceInfo = await axios.get(
-          "http://localhost:3001/api/v1/account/balance",
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
+        const balanceInfo = await axios.get("/v1/account/balance");
 
-        console.log(balanceInfo.data.balance);
+        console.log(balanceInfo.data);
         setBalance(balanceInfo.data.balance);
       } catch (err) {
         console.log("error in dashboard ", err);
@@ -31,11 +21,24 @@ export default function DashBoard() {
     /**
      * one more depenency will be there that updates balance if some transaction occurs
      */
-  }, [token]);
+  }, []);
+
+  //   <div>
+  //   DashBoard Balance {balance}
+  //   <SearchUser />
+  // </div>
 
   return (
     <div>
-      DashBoard Balance {balance}
+      <div className="max-w-md mt-10 mx-auto overflow-hidden rounded-lg shadow-lg border-l-8 border-pink-500">
+        <div className="p-6">
+          <h2 className="text-gray-800 text-2xl font-semibold mb-2">
+            Balance :
+            <br />
+            {balance}
+          </h2>
+        </div>
+      </div>
       <SearchUser />
     </div>
   );

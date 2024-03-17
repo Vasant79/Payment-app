@@ -13,9 +13,5 @@ export default function SendMoney({ firstname }) {
     navigate("/send");
   }
 
-  return (
-    <div>
-      <Button onClick={handleClick}>Transfer Money</Button>
-    </div>
-  );
+  return <Button onClick={handleClick}>Transfer Money</Button>;
 }

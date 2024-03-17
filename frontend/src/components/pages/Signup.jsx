@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Button from "../reusableComp/Button";
+import Input from "../reusableComp/Input";
+import Heading from "../reusableComp/Heading";
 
 export default function Signup() {
   const [FirstName, setFirstName] = useState("");
@@ -10,11 +12,11 @@ export default function Signup() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
+  // url: "http://localhost:3001/v1/user/signup",
   async function reqToServer() {
     const call = await axios({
       method: "post",
-      url: "http://localhost:3001/api/v1/user/signup",
+      url: "/v1/user/signup",
       data: {
         firstName: FirstName,
         lastName: LastName,
@@ -23,12 +25,12 @@ export default function Signup() {
       },
     });
     console.log("sign up ", call.data);
-    return call.data;
+    // return call.data;
   }
 
   function handleSubmitForm(event) {
     event.preventDefault();
-    // console.log(FirstName, LastName, email, password);
+    //console.log(FirstName, LastName, email, password);
     // console.log("form submitted");
 
     /**
@@ -39,38 +41,57 @@ export default function Signup() {
      */
     if (reqToServer()) {
       console.log("user added");
-      navigate("/dashboard");
+      navigate("/signin");
     } else {
       console.log("Error in sign up");
     }
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmitForm}>
-        <label>FirstName : </label>
-        <input
-          type="text"
-          onChange={(e) => setFirstName(e.target.value)}
-        ></input>
+    <div className="bg-gradient-to-r from-white to-purple-400  h-screen flex justify-center items-center">
+      <div className="max-w-md mt-10 mx-auto overflow-hidden bg-white rounded-lg shadow-lg border-l-8 border-pink-500">
+        <div className=" p-4">
+          <Heading label="Sign Up" />
+        </div>
+        <form onSubmit={handleSubmitForm}>
+          <div className="flex flex-col justify-center">
+            <div>
+              <Input
+                label="FirstName"
+                type="text"
+                onChange={(e) => setFirstName(e.target.value)}
+              ></Input>
+            </div>
 
-        <label>LastName : </label>
-        <input
-          type="text"
-          onChange={(e) => setLastName(e.target.value)}
-        ></input>
+            <div>
+              <Input
+                label="LastName"
+                type="text"
+                onChange={(e) => setLastName(e.target.value)}
+              ></Input>
+            </div>
+            <div>
+              <Input
+                label="Email"
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+              ></Input>
+            </div>
 
-        <label>Email : </label>
-        <input type="email" onChange={(e) => setEmail(e.target.value)}></input>
+            <div>
+              <Input
+                label="Password"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              ></Input>
+            </div>
 
-        <label>Password : </label>
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-
-        <Button type="submit">Submit</Button>
-      </form>
+            <div className="mx-auto">
+              <Button type="submit">Submit</Button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
