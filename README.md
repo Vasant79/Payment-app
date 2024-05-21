@@ -2,7 +2,7 @@
 
 A payment application
 
--- work in progress --
+-- functionally all good to go, work in progress for revamping UI --
 
 ## Tech Stack used :
 
