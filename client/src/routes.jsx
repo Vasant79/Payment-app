@@ -1,5 +1,6 @@
 import LandingPage from "./pages/LandingPage";
 import Signup from "./components/Signup";
+import Dashboard from "./pages/Dashboard";
 
 /**
  contains public and private routes
@@ -7,16 +8,16 @@ import Signup from "./components/Signup";
 
 const privateRoutes = [
   {
-    path: "/",
-    element: <LandingPage />,
-  },
-  {
     path: "/home",
-    element: <LandingPage />,
+    element: <Dashboard />,
   },
 ];
 
 const publicRoutes = [
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
   {
     path: "/signup",
     element: <Signup />,
