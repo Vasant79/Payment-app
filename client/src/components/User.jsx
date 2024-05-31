@@ -1,6 +1,6 @@
 import { FaUserCircle } from "react-icons/fa";
 
-function Logout() {
+function User() {
   return (
     <div>
       <FaUserCircle className="h-6 w-6 mx-2 text-gray-500 hover:text-black" />
@@ -8,4 +8,4 @@ function Logout() {
   );
 }
 
-export default Logout;
+export default User;

@@ -49,10 +49,6 @@ const Signin = () => {
   return (
     <div className="container mx-auto min-h-screen flex justify-center items-center">
       <form className="w-full max-w-md" onSubmit={handleSubmit}>
-        <div className=" flex justify-center items-center">
-          <img className="h-20 w-auto" src={logo} alt="logo" />
-        </div>
-
         <div className="flex  justify-center items-center ">
           <Link
             to="/Signin"
