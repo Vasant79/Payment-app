@@ -22,8 +22,8 @@ const Signup = () => {
   }
   return (
     <div className="container mx-auto min-h-screen  flex justify-center items-center">
-      <form className="w-full max-w-md" onSubmit={handleSubmit}>
-        <div className="text-center text-2xl mb-10  ">
+      <form className=" p-2 w-full max-w-md" onSubmit={handleSubmit}>
+        <div className="text-center text-lg mb-10  ">
           <Link
             className="w-1/2 px-4 pb-2 border-b border-gray-600 text-gray-500"
             to="/signin"

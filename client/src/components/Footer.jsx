@@ -4,8 +4,8 @@ import { FaSquareGithub } from "react-icons/fa6";
 
 function Footer() {
   return (
-    <div className="mx-10  p-5 flex justify-between bg-gray-100 rounded-xl">
-      <div className="ml-16 text-left">
+    <div className="mx-10  md:p-5 md:flex md:justify-between bg-gray-100 rounded-xl">
+      <div className="p-5 md:ml-16 text-left">
         {/* company logo */}
         <span className="italic"> FastPay</span>
         <div className="max-w-sm  mt-2 text-xs text-gray-700 text-balance">
@@ -19,8 +19,8 @@ function Footer() {
 
       <div>{/* some main content */}</div>
 
-      <div className="flex mx-20">
-        <div className="mr-80">
+      <div className=" mx-5 md:flex md:mx-20">
+        <div className="md:mr-80">
           <span className="block font-semibold">DEVELOPER</span>
           <span className=" block text-blue-700">
             Docs
@@ -28,7 +28,7 @@ function Footer() {
             Integration
           </span>
 
-          <div className="mt-10 text-xs text-center">
+          <div className="w-full pb-2 mt-10 text-xs md:text-center">
             © FastPay 2024 All Rights Reserved
           </div>
         </div>
@@ -41,10 +41,10 @@ function Footer() {
               Knowledge
             </span>
           </div>
-          <div className="mt-5">
+          <div className="mt-5 pb-2">
             <span className="block font-semibold">FIND US ONLINE</span>
             {/* insta twitter github logo */}
-            <span className="flex">
+            <span className="flex ">
               <FaSquareInstagram className="h-6 w-6 mx-1 text-pink-600" />
               <FaTwitter className="h-6 w-6 mx-1 text-blue-600" />
               <FaSquareGithub className="h-6 w-6 mx-1 text-black" />

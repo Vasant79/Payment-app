@@ -22,7 +22,16 @@ function Dashboard() {
         <Carousel data={data} />
       </div>
 
-      <div className="mt-40 flex flex-col lg:flex-row justify-center items-center">
+      <div className="md:hidden text-center">
+        <span className="block font-Loto text-3xl font-semibold italic text-blue-500">
+          Fastpay !!{" "}
+        </span>
+        <span className="block text-gray-400 text-xs italic">
+          Where speed meets security
+        </span>
+      </div>
+
+      <div className="mt-20 flex flex-col lg:flex-row justify-center items-center">
         <DescriptionSeaction title={"About FastPay"} content={projectContent} />
         <DescriptionSeaction title={"Tech Stack "} content={techStack} />
         <DescriptionSeaction title={"Features"} content={features} />

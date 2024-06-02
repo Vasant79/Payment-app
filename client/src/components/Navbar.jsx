@@ -11,17 +11,17 @@ function Navbar() {
     navigate("/home");
   }
   function handleTwitter() {
-    navigate("/https://twitter.com/VasantNegi");
+    navigate("https://twitter.com/VasantNegi");
   }
   function handleGithub() {
-    navigate("/https://github.com/Vasant79");
+    navigate("https://github.com/Vasant79");
   }
   function handleUser() {
     navigate("/userdetail");
   }
 
   return (
-    <nav className="mt-10 w-full flex justify-center items-center font-inter font-light text-md  bg-gray-200 rounded-full">
+    <nav className="mt-5 w-full flex  justify-center items-center font-inter font-light text-md  bg-gray-200 rounded-full">
       <span
         className="m-2 p-2  bg-gray-100 border rounded-xl hover:shadow-xl"
         onClick={handleHome}

@@ -1,9 +1,10 @@
 import bitcoin from "../assets/bitcoin.png";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (
-    <div className="container mx-auto h-screen flex flex-col justify-center items-center">
+    <div className="container mx-auto h-screen mt-20 flex flex-col justify-center items-center">
       {/* Logo */}
       <div className="mb-7">
         <img className="h-80 w-80" src={bitcoin} alt="logo" />
@@ -22,7 +23,7 @@ const LandingPage = () => {
         </h4>
       </div>
 
-      <div className="text-md  text-center">
+      <div className="mb-36 text-md text-center">
         <Link
           className="mx-2 px-5 py-2 text-white border bg-blue-500 hover:bg-blue-700 rounded-lg shadow-md"
           to="/signin"
@@ -36,6 +37,10 @@ const LandingPage = () => {
         >
           Sign up
         </Link>
+      </div>
+
+      <div className="w-screen">
+        <Footer />
       </div>
     </div>
   );
