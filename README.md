@@ -22,23 +22,23 @@ A payment application.
 
 ### Landing page
 
-![alt text](./src/assets//snapshot/landingPage.jpeg)
+![alt text](./client/src/assets//snapshot/landingPage.jpeg)
 
 ### Sign-up & Sign-in page
 
-![alt text ](./src/assets/snapshot/sign-up.jpeg)
+![alt text ](./client/src/assets/snapshot/sign-up.jpeg)
 
-![alt text](./src/assets/snapshot/sign-in.jpeg)
+![alt text](./client/src/assets/snapshot/sign-in.jpeg)
 
 ### Dashboard page
 
-![alt text](./src/assets/snapshot/dashboard-1.jpeg)
-![al text](./src/assets/snapshot/dashboard-2.jpeg)
+![alt text](./client/src/assets/snapshot/dashboard-1.jpeg)
+![al text](./client/src/assets/snapshot/dashboard-2.jpeg)
 
 ### User details page
 
-![alt text](./src/assets//snapshot/user-detail.jpeg)
+![alt text](./client/src/assets//snapshot/user-detail.jpeg)
 
 ### Transaction history page
 
-![alt text](./src/assets/snapshot/transfer-history.jpeg)
+![alt text](./client/src/assets/snapshot/transfer-history.jpeg)
