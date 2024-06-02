@@ -1,23 +1,44 @@
 # FastPay
 
-A payment application
+A payment application.
 
--- functionally all good to go, work in progress for revamping UI --
+## Teach Stack
 
-## Tech Stack used :
+1. React Js
+2. Tailwind css
+3. Redux / ReduxToolkit
+4. Node Js
+5. Express
+6. MongoDB
 
-1. React
-2. Nodejs
-3. Express
-4. MongoDB
+## Features
 
-# Usage :
+1. Sign-in, Sign-up.
+2. Transfer money to peers.
 
-when a user sign up, token is generated & a random balance is assigned to him.
-After login with username & password user can :
+## Snapshots
 
-1. check his balance.
-2. tranfer money to peers.
+    Application is responsive
 
-3. Mongo db transaxtion are used to securly handel tarnfer of payment, no .env file credentials are directly use as it it a demo project.
-4. Jwt authentication for user token.
+### Landing page
+
+![alt text](./src/assets//snapshot/landingPage.jpeg)
+
+### Sign-up & Sign-in page
+
+![alt text ](./src/assets/snapshot/sign-up.jpeg)
+
+![alt text](./src/assets/snapshot/sign-in.jpeg)
+
+### Dashboard page
+
+![alt text](./src/assets/snapshot/dashboard-1.jpeg)
+![al text](./src/assets/snapshot/dashboard-2.jpeg)
+
+### User details page
+
+![alt text](./src/assets//snapshot/user-detail.jpeg)
+
+### Transaction history page
+
+![alt text](./src/assets/snapshot/transfer-history.jpeg)
