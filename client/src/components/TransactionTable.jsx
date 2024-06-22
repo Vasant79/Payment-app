@@ -50,8 +50,8 @@ function TransactionTable() {
         </thead>
 
         <tbody className=" bg-gray-200">
-          {reccord &&
-            reccord.map((eachData) => {
+          {currentData &&
+            currentData.map((eachData) => {
               return (
                 <tr className="text-center " key={eachData.id}>
                   <td className="py-2 border">
