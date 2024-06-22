@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 
 function UserDetails() {
   const navigate = useNavigate();
+
   function handleClick() {
     navigate("/transaction-history");
   }

@@ -16,7 +16,7 @@ function TransactionPage() {
         </span>
       </div>
       <div className=" mb-40 w-full max-w-md mx-auto">
-        <TransactionTable reccord={reccord} />
+        <TransactionTable />
       </div>
 
       <div>

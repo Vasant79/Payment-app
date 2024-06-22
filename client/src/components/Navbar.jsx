@@ -2,7 +2,7 @@ import User from "./User";
 import { FaGithub } from "react-icons/fa";
 import { TiSocialTwitter } from "react-icons/ti";
 import { TiHome } from "react-icons/ti";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirectDocument } from "react-router-dom";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -11,10 +11,11 @@ function Navbar() {
     navigate("/home");
   }
   function handleTwitter() {
-    navigate("https://twitter.com/VasantNegi");
+    window.location.href = "https://twitter.com/VasantNegi";
   }
   function handleGithub() {
-    navigate("https://github.com/Vasant79");
+    // react router dom is only for internal routing
+    window.location.href = "https://github.com/Vasant79";
   }
   function handleUser() {
     navigate("/userdetail");
